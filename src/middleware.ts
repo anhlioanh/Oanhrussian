@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from 'next/server';
 
-export async function middleware(_request: NextRequest) {
+export async function middleware() {
   const response = NextResponse.next();
 
   // Enhanced Security Headers
