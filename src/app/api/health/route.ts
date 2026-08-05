@@ -10,19 +10,18 @@ export async function GET() {
     if (env.SUPABASE_URL && env.SUPABASE_ANON_KEY) {
       const supabase = createClient(env.SUPABASE_URL, env.SUPABASE_ANON_KEY);
       
-      // Tối ưu: Kiểm tra DB engine trực tiếp qua truy vấn Postgres native, không dùng bảng dữ liệu
-      const { error } = await supabase.rpc('version').select();
+      // Gọi Custom RPC Function public.healthcheck()
+      const { data, error } = await supabase.rpc('healthcheck');
 
-      // Nếu rpc chưa mở, fallback sang kiểm tra bảng profiles mặc định
-      if (error) {
-        const { error: profileError } = await supabase.from('profiles').select('id').limit(1);
-        dbStatus = !profileError ? 'connected' : 'error';
-      } else {
+      if (!error && data === 'ok') {
         dbStatus = 'connected';
+      } else {
+        logger.warn('Healthcheck RPC returned error', error?.message);
+        dbStatus = 'error';
       }
     }
   } catch (err) {
-    logger.error('Healthcheck DB Exception', err);
+    logger.error('Healthcheck DB Connection Exception', err);
     dbStatus = 'error';
   }
 

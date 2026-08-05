@@ -1,0 +1,34 @@
+# 🏛 OanhRussian Engineering Constitution v1.0
+
+Tài liệu này định nghĩa các giới hạn đỏ bất biến (Non-negotiable Rules). Mọi Pull Request vi phạm bất kỳ điều khoản nào dưới đây đều bị từ chối Merge.
+
+---
+
+### 1. Quy tắc Code (Code Quality Standards)
+* **Zero Explicit Any:** Tuyệt đối không sử dụng `any`. Mọi giá trị phải có Type/Interface rõ ràng.
+* **Zero Hardcode:** Không hardcode string, URL, secret hoặc config. Tất cả truy xuất qua `@/config/env` hoặc `@/config/site`.
+* **DRY (Don't Repeat Yourself):** Không duplicate logic quá 2 nơi. Tái sử dụng qua `utils`, `hooks` hoặc `services`.
+* **Zero Warning Tolerance:** Nhánh `main` và `develop` phải luôn ở trạng thái 0 Warning (ESLint, TypeScript, Next.js).
+* **Strict Code Review:** Không merge code nếu chưa được review qua Vercel Preview URL.
+
+### 2. Quy tắc Git & CI/CD
+* **Protected Main:** Không bao giờ commit hoặc `push --force` trực tiếp lên `main` và `develop`.
+* **Green Pipeline Requirement:** Không merge PR khi CI Status Check (`verify`) chưa báo xanh 100%.
+* **Semantic Tagging:** Mọi cột mốc nghiệm thu giai đoạn phải gắn Git Tag (`vX.Y.Z`).
+
+### 3. Quy tắc UI/UX
+* **Mobile First Standard:** Thiết kế và kiểm thử giao diện trên màn hình di động trước khi tối ưu cho Desktop.
+* **Accessibility First:** Mọi element tương tác bắt buộc có Semantic HTML, Keyboard Navigation và độ tương phản đạt chuẩn WCAG.
+
+### 4. Quy tắc Database (Supabase / PostgreSQL)
+* **Migration Driven:** Mọi thay đổi Schema bắt buộc thực hiện qua file Migration, không sửa trực tiếp trên Supabase UI.
+* **No Direct Column Deletion:** Không xóa cột đang hoạt động trên Production. Áp dụng quy trình 2 bước: `Deprecated -> Delete`.
+* **Data Integrity:** Không thao tác hoặc sửa dữ liệu Production bằng tay.
+
+### 5. Quy tắc Bảo mật (Security)
+* **Zero Secret Leak:** Không bao giờ log secret, token, JWT hoặc `SUPABASE_SERVICE_ROLE_KEY` ở phía Client.
+* **Zero Trust Client Input:** Mọi dữ liệu truyền từ Client lên Server/API bắt buộc phải được validate kỹ lưỡng qua Schema Sanitization (zod/valibot).
+
+### 6. Quy tắc Tài liệu (Documentation)
+* **ADR Requirement:** Mọi quyết định thay đổi kiến trúc hoặc chọn thư viện mới phải có file ADR tương ứng.
+* **API Self-Documentation:** Tự đóng gói mô tả type/interface và ghi chú rõ ràng cho từng API Route.
