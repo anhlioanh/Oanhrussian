@@ -1,19 +1,25 @@
-import type { Metadata } from 'next';
-import './globals.css';
+import { Inter } from 'next/font/google';
+import '@/styles/globals.css';
+import { ThemeProvider } from '@/providers/theme-provider';
 
-export const metadata: Metadata = {
-  title: 'OanhRussian - Học Tiếng Nga Trực Quan',
-  description: 'Nền tảng học tiếng Nga hiện đại, trực quan và tối ưu cho người Việt.',
-};
+const inter = Inter({
+  subsets: ['latin', 'latin-ext', 'cyrillic'],
+  variable: '--font-sans',
+  display: 'swap',
+});
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="vi" suppressHydrationWarning>
-      <body className="min-h-screen bg-background font-sans antialiased">{children}</body>
+    <html lang="vi" suppressHydrationWarning className={inter.variable}>
+      <body className="min-h-screen bg-background font-sans text-foreground antialiased">
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

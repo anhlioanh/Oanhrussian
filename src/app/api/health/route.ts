@@ -9,14 +9,14 @@ export async function GET() {
   try {
     if (env.SUPABASE_URL && env.SUPABASE_ANON_KEY) {
       const supabase = createClient(env.SUPABASE_URL, env.SUPABASE_ANON_KEY);
-      // Kiểm tra thông qua bảng healthcheck tiêu chuẩn
-      const { error } = await supabase.from('healthcheck').select('id').limit(1);
+      
+      // Gọi Custom RPC Function public.healthcheck()
+      const { data, error } = await supabase.rpc('healthcheck');
 
-      if (!error) {
+      if (!error && data === 'ok') {
         dbStatus = 'connected';
       } else {
-        // Nếu chưa tạo bảng healthcheck trong SQL editor
-        logger.warn('Healthcheck table query returned error', error.message);
+        logger.warn('Healthcheck RPC returned error', error?.message);
         dbStatus = 'error';
       }
     }
