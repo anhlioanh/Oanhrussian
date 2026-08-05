@@ -13,14 +13,14 @@ export function ThemeToggle() {
   }, []);
 
   if (!mounted) {
-    return <div className="border-border h-9 w-24 rounded-md border" />;
+    return <div className="bg-muted h-9 w-24 animate-pulse rounded-md" />;
   }
 
   return (
-    <div className="border-border inline-flex items-center rounded-lg border bg-background p-1">
+    <div className="border-border bg-background inline-flex items-center rounded-lg border p-1">
       <button
         onClick={() => setTheme('light')}
-        className={`rounded-md p-1.5 transition-colors ${
+        className={`focus-visible:ring-ring rounded-md p-1.5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
           theme === 'light'
             ? 'bg-accent text-accent-foreground'
             : 'text-muted-foreground hover:text-foreground'
@@ -32,7 +32,7 @@ export function ThemeToggle() {
 
       <button
         onClick={() => setTheme('dark')}
-        className={`rounded-md p-1.5 transition-colors ${
+        className={`focus-visible:ring-ring rounded-md p-1.5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
           theme === 'dark'
             ? 'bg-accent text-accent-foreground'
             : 'text-muted-foreground hover:text-foreground'
@@ -44,7 +44,7 @@ export function ThemeToggle() {
 
       <button
         onClick={() => setTheme('system')}
-        className={`rounded-md p-1.5 transition-colors ${
+        className={`focus-visible:ring-ring rounded-md p-1.5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
           theme === 'system'
             ? 'bg-accent text-accent-foreground'
             : 'text-muted-foreground hover:text-foreground'

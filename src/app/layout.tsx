@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import '@/styles/globals.css';
+import { siteConfig } from '@/config/site';
 import { ThemeProvider } from '@/providers/theme-provider';
 
 const inter = Inter({
@@ -11,8 +12,11 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'OanhRussian - Học Tiếng Nga',
-  description: 'Nền tảng học tiếng Nga hiện đại và hiệu quả',
+  title: {
+    default: siteConfig.name,
+    template: `%s | ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
 };
 
 export const viewport: Viewport = {
@@ -25,7 +29,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="vi" suppressHydrationWarning className={inter.variable}>
-      <body className="min-h-screen bg-background font-sans text-foreground antialiased">
+      <body className="bg-background text-foreground min-h-screen font-sans antialiased">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {children}
         </ThemeProvider>
