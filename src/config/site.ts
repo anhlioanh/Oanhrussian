@@ -1,12 +1,19 @@
-import { env } from './env';
-
 export const siteConfig = {
   name: 'OanhRussian',
-  description: 'Nền tảng học tiếng Nga hiện đại, trực quan và hiệu quả cho người Việt.',
-  url: env.SITE_URL,
-  ogImage: '/images/og-default.jpg',
+  description: 'Nền tảng học tiếng Nga hiện đại, lộ trình bài bản và hiệu quả.',
+  url: process.env.NEXT_PUBLIC_APP_URL || 'https://oanhrussian.vercel.app',
+  ogImage: '/og.png',
+  keywords: [
+    'tiếng Nga',
+    'học tiếng Nga',
+    'Russian language',
+    'ngữ pháp tiếng Nga',
+    'từ vựng tiếng Nga',
+    'OanhRussian',
+  ],
   links: {
-    github: 'https://github.com/anhlioanh/Oanhrussian',
+    facebook: 'https://facebook.com',
+    youtube: 'https://youtube.com',
   },
 };
 
