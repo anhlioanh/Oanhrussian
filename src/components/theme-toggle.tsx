@@ -13,11 +13,11 @@ export function ThemeToggle() {
   }, []);
 
   if (!mounted) {
-    return <div className="h-9 w-24 rounded-md border border-border" />;
+    return <div className="border-border h-9 w-24 rounded-md border" />;
   }
 
   return (
-    <div className="inline-flex items-center rounded-lg border border-border bg-background p-1">
+    <div className="border-border inline-flex items-center rounded-lg border bg-background p-1">
       <button
         onClick={() => setTheme('light')}
         className={`rounded-md p-1.5 transition-colors ${
