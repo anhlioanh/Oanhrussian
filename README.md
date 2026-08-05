@@ -13,5 +13,5 @@ Website học tiếng Nga hiện đại, trực quan và tối ưu cho người 
 
 1. **Clone repository:**
    ```bash
-   git clone [https://github.com/your-username/oanhrussian.git](https://github.com/your-username/oanhrussian.git)
+   git clone [https://github.com/anhlioanh/oanhrussian.git](https://github.com/anhlioanh/oanhrussian.git)
    cd oanhrussian
