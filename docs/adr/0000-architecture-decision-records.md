@@ -16,4 +16,4 @@ Mỗi quyết định kiến trúc lớn (chọn framework, CSDL, cơ chế Auth
 
 ## Hệ quả
 - **Tích cực:** Minh bạch lịch sử kỹ thuật, giúp thành viên mới dễ dàng nắm bắt lý do đằng sau các quyết định.
-- **Tiêu tốn:** Cần bổ sung bước viết ADR trong quy trình nghiệm thu mỗi giai đoạn.
+- **Tiêu tốn:** Cần bổ sung bước viết ADR trong quy trình nghiệm thu mỗi giai đoạn.1
