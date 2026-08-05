@@ -9,19 +9,20 @@ export async function GET() {
   try {
     if (env.SUPABASE_URL && env.SUPABASE_ANON_KEY) {
       const supabase = createClient(env.SUPABASE_URL, env.SUPABASE_ANON_KEY);
-      // Kiểm tra thông qua bảng healthcheck tiêu chuẩn
-      const { error } = await supabase.from('healthcheck').select('id').limit(1);
+      
+      // Tối ưu: Kiểm tra DB engine trực tiếp qua truy vấn Postgres native, không dùng bảng dữ liệu
+      const { error } = await supabase.rpc('version').select();
 
-      if (!error) {
-        dbStatus = 'connected';
+      // Nếu rpc chưa mở, fallback sang kiểm tra bảng profiles mặc định
+      if (error) {
+        const { error: profileError } = await supabase.from('profiles').select('id').limit(1);
+        dbStatus = !profileError ? 'connected' : 'error';
       } else {
-        // Nếu chưa tạo bảng healthcheck trong SQL editor
-        logger.warn('Healthcheck table query returned error', error.message);
-        dbStatus = 'error';
+        dbStatus = 'connected';
       }
     }
   } catch (err) {
-    logger.error('Healthcheck DB Connection Exception', err);
+    logger.error('Healthcheck DB Exception', err);
     dbStatus = 'error';
   }
 
